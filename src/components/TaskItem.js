@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 
 class TaskItem extends Component {
     state = {}
+    
+    onUpdateStatus = () => {
+        this.props.onUpdateStatus(this.props.task.id);
+        
+    }
+
+
+
     render() {
         const { task, index } = this.props;
         return (
@@ -10,8 +18,10 @@ class TaskItem extends Component {
                 <td>{task.title}</td>
                 <td className="text-center">
                     <span
+                        style={{ cursor: 'pointer' }}
                         className={task.status === true ?
                             'label label-success' : 'label label-danger'}
+                        onClick={ this.onUpdateStatus }
                     >
                         {task.status === true ? 'Done' : 'Pending'}
                     </span>

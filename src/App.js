@@ -64,6 +64,20 @@ class App extends Component {
         console.log(tasks);
     }
 
+    onUpdateStatus = (id) => {
+        let tempTask  =  this.state.tasks.map( (task) => {
+            if (task.id === id) {
+                task.status = !task.status;               
+            }
+            return task;
+        });
+
+        this.setState({
+            tasks: tempTask
+        });
+        localStorage.setItem('tasks', JSON.stringify(this.state.tasks));
+    }
+
     render() {
         // const tasks = this.state.tasks
         const { tasks, isDisplayForm } = this.state;
@@ -93,7 +107,10 @@ class App extends Component {
                         {/* List */}
                         <div className="row">
                             <div className="width-100 mt-15">
-                                <TaskList tasks={tasks} />
+                                <TaskList 
+                                    tasks={ tasks } 
+                                    onUpdateStatus={ this.onUpdateStatus }
+                                />
                             </div>
                         </div>
                     </div>

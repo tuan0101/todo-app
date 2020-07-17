@@ -7,7 +7,10 @@ class TaskList extends Component {
         //const tasks = this.props.tasks
         const {tasks} = this.props;
         const taskElement = tasks.map((task, index) => {
-            return <TaskItem key={task.id} index={index} task={task}/>
+            return <TaskItem 
+                key={ task.id } index={ index } task={ task }
+                onUpdateStatus={ this.props.onUpdateStatus }
+            />
         });
         console.log('tasks: ' + tasks);
         console.log('element: ' + taskElement);
