@@ -22,30 +22,7 @@ class App extends Component {
             });
         }
     }
-    onGenerateData = () => {
-        const tasks = [
-            {
-                id: this.generateID(),
-                title: 'Learning React',
-                status: true
-            },
-            {
-                id: this.generateID(),
-                title: 'Learning JavaScript',
-                status: false
-            },
-            {
-                id: this.generateID(),
-                title: 'Learning Redux',
-                status: true
-            },
-        ];
-        this.setState({
-            tasks: tasks
-        });
-        // convert tasks objects to string => store in localStorage
-        localStorage.setItem('tasks', JSON.stringify(tasks))
-    }
+
 
     // generate UUID
     h4() {
@@ -110,12 +87,6 @@ class App extends Component {
                             className="btn btn-primary"
                             onClick={ this.onToggleForm }>
                             <span className="fa fa-plus mr-5"></span>Thêm Công Việc
-                        </button>
-                        <button
-                            type="button"
-                            className="btn btn-warning ml-15"
-                            onClick={this.onGenerateData}>
-                            Generate Data
                         </button>
                         {/* Search - Sort */}
                         <Control />

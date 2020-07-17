@@ -17,7 +17,7 @@ class TaskForm extends Component {
 
     onChange = (event) => {
         // const target = event.target;
-        // const name = target.name;
+        // const field = target.name;
         // let value = target.value;
         let { target: {name, value}} =event;
 
@@ -36,6 +36,13 @@ class TaskForm extends Component {
         event.preventDefault();
         //this.props.onSubmit(this.state); -> this return the status as a string
         this.props.onSubmit(this.state);
+    }
+
+    onClear = () => {
+        this.setState({
+            title: '',
+            status: false
+        });
     }
 
     render() {
@@ -80,9 +87,13 @@ class TaskForm extends Component {
                                 <i className="fa fa-plus mr-5"></i>
                                         Thêm
                                     </button>&nbsp;
-                            <button type="submit" className="btn btn-danger">
+                            <button 
+                                type="button" 
+                                className="btn btn-danger"
+                                onClick={ this.onClear }
+                            >
                                 <i className="fa fa-times mr-5"></i>
-                                Hủy Bỏ
+                                Reset
                             </button>
                         </div>
                     </form>
