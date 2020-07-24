@@ -17,9 +17,6 @@ class TaskItem extends Component {
         this.props.onDelete(this.props.task.id);
     }
 
-    onEdit = () => {
-        //this.props.onEdit(this.props.task.id);
-    }
 
     onEditing = () => {
         let { isEditing } = this.state;
@@ -45,11 +42,11 @@ class TaskItem extends Component {
 
         
 
-    onSubmit = (event) => {
+    onEnterKey= (event) => {
         if (event.keyCode === 13) {
             console.log('pressed enter');
             event.target.blur(); // remove focus after press enter
-            this.props.onSubmit(this.state);
+            this.props.onEdit(this.state);
         }
     }
 
@@ -75,11 +72,11 @@ class TaskItem extends Component {
                 <span className="fa fa-plus mr-5"></span>
                     add
                 </button> : '';
-        const addInput = this.state.isEditing ?
-            <input
-                style={inputStyle}
-            >
-            </input> : '';
+        // const addInput = this.state.isEditing ?
+        //     <input
+        //         style={inputStyle}
+        //     >
+        //     </input> : '';
 
 
         return (
@@ -107,10 +104,11 @@ class TaskItem extends Component {
                     <input 
                         type="text"
                         name="title"
-                        style={ textStyle }
+                        style={ inputStyle }
                         value={this.state.title}
                         onChange={this.onChange}
-                        onKeyUp={ this.onSubmit }
+                        onKeyUp={ this.onEnterKey }
+
                     />
 
 
@@ -129,7 +127,6 @@ class TaskItem extends Component {
                     <button
                         type="button"
                         className="btn btn-warning"
-                        onClick={this.onEdit}
                     >
                         <span className="fa fa-pencil mr-5">
                         </span>Highlight
@@ -148,15 +145,12 @@ class TaskItem extends Component {
         );
     }
 }
-const textStyle = {
-    border: "none",
-    width: "100%",
-    height: "inherit%",
-}
-
 const inputStyle = {
-    width: "auto",
-    height: "auto"
+    border: "none",
+    background: "transparent",
+    width: "100%",
+    height: "inherit",
+    opacity: "1"
 }
 
 export default TaskItem;

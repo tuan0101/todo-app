@@ -24,7 +24,7 @@ class App extends Component {
                 tasks: tasks
             });
         }
-    } 
+    }
 
     // generate UUID
     h4() {
@@ -86,15 +86,45 @@ class App extends Component {
         this.setState({
             tasks: tempTask
         });
-    
+
         localStorage.setItem('tasks', JSON.stringify(tempTask));
         // this doesn't work because this.setState may not update fast enough
         //localStorage.setItem('tasks', JSON.stringify(this.state.tasks));       
     }
 
-    onEdit = (id) => {
-        console.log('edit: ' + id);
+    onEdit = (data) => {
+        const { tasks } = this.state;
+
+        if (data.id === '') {
+            // add a new task
+            data.id = this.generateID();
+            tasks.push(data);
+        } else {
+            // edit current task
+            console.log('data ID: ' + data.id);
+            console.log('data title: ' + data.title);
+            
+            let tempTask = this.state.tasks.map((task) => {
+                if (task.id === data.id) {
+                    task.title = data.title;
+                }
+                return task;
+            });
+    
+            this.setState({
+                tasks: tempTask
+            });
+
+        }
+
         
+        this.setState({
+            tasks: tasks
+        });
+
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        console.log(tasks);
+
     }
 
     render() {
@@ -121,7 +151,7 @@ class App extends Component {
                             onClick={this.onToggleForm}>
                             <span className="fa fa-plus mr-5"></span>Add a task
                         </button>
-                        <AddItem onSubmit={this.onSubmit}/>
+                        <AddItem onSubmit={this.onSubmit} />
                         {/* Search - Sort */}
                         <Control />
                         {/* List */}
@@ -131,7 +161,7 @@ class App extends Component {
                                     tasks={tasks}
                                     onUpdateStatus={this.onUpdateStatus}
                                     onDelete={this.onDelete}
-                                    onEdit= { this.onEdit }
+                                    onEdit={this.onEdit}
                                     onSubmit={this.onSubmit}
                                 />
                             </div>

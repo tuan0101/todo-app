@@ -12,7 +12,7 @@ class TaskList extends Component {
                 onUpdateStatus={ this.props.onUpdateStatus }
                 onDelete= { this.props.onDelete }
                 onEdit= { this.props.onEdit }
-                onSubmit={this.props.onSubmit}
+                //onSubmit={this.props.onSubmit}
             />
         });
         
