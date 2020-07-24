@@ -4,11 +4,14 @@ import './components/TaskForm';
 import TaskForm from './components/TaskForm';
 import Control from './components/Control';
 import TaskList from './components/TaskList';
+import AddItem from './components/AddItem';
+
 
 class App extends Component {
     state = {
         tasks: [],
-        isDisplayForm: false
+        isDisplayForm: false,
+        isEditing: false
     }
 
     // this function is called once after refresh the page
@@ -21,8 +24,7 @@ class App extends Component {
                 tasks: tasks
             });
         }
-    }
-
+    } 
 
     // generate UUID
     h4() {
@@ -65,9 +67,9 @@ class App extends Component {
     }
 
     onUpdateStatus = (id) => {
-        let tempTask  =  this.state.tasks.map( (task) => {
+        let tempTask = this.state.tasks.map((task) => {
             if (task.id === id) {
-                task.status = !task.status;               
+                task.status = !task.status;
             }
             return task;
         });
@@ -78,16 +80,33 @@ class App extends Component {
         localStorage.setItem('tasks', JSON.stringify(this.state.tasks));
     }
 
+    onDelete = (id) => {
+        let tempTask = this.state.tasks.filter(task =>
+            task.id !== id);
+        this.setState({
+            tasks: tempTask
+        });
+    
+        localStorage.setItem('tasks', JSON.stringify(tempTask));
+        // this doesn't work because this.setState may not update fast enough
+        //localStorage.setItem('tasks', JSON.stringify(this.state.tasks));       
+    }
+
+    onEdit = (id) => {
+        console.log('edit: ' + id);
+        
+    }
+
     render() {
         // const tasks = this.state.tasks
         const { tasks, isDisplayForm } = this.state;
-        const taskFormElement = isDisplayForm ? 
-            <TaskForm onCloseForm={ this.onCloseForm} onSubmit={ this.onSubmit }/> : '';
-            
+        const taskFormElement = isDisplayForm ?
+            <TaskForm onCloseForm={this.onCloseForm} onSubmit={this.onSubmit} /> : '';
+
         return (
             <div className="container">
                 <div className="text-center">
-                    <h1>Quản Lý Công Việc</h1>
+                    <h1>To-do List</h1>
                     <hr />
                 </div>
                 <div className="row">
@@ -99,17 +118,21 @@ class App extends Component {
                         <button
                             type="button"
                             className="btn btn-primary"
-                            onClick={ this.onToggleForm }>
-                            <span className="fa fa-plus mr-5"></span>Thêm Công Việc
+                            onClick={this.onToggleForm}>
+                            <span className="fa fa-plus mr-5"></span>Add a task
                         </button>
+                        <AddItem onSubmit={this.onSubmit}/>
                         {/* Search - Sort */}
                         <Control />
                         {/* List */}
                         <div className="row">
                             <div className="width-100 mt-15">
-                                <TaskList 
-                                    tasks={ tasks } 
-                                    onUpdateStatus={ this.onUpdateStatus }
+                                <TaskList
+                                    tasks={tasks}
+                                    onUpdateStatus={this.onUpdateStatus}
+                                    onDelete={this.onDelete}
+                                    onEdit= { this.onEdit }
+                                    onSubmit={this.onSubmit}
                                 />
                             </div>
                         </div>

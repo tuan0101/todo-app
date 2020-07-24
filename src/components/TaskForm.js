@@ -49,7 +49,7 @@ class TaskForm extends Component {
         return (
             <div className="panel panel-warning">
                 <div className="panel-heading">
-                    <h4 className="panel-title">Thêm Công Việc
+                    <h4 className="panel-title">Add a task
                             <span
                             className="fa fa-times-circle float-right"
                             onClick={this.onCloseForm}
@@ -60,7 +60,7 @@ class TaskForm extends Component {
                 <div className="panel-body">
                     <form onSubmit={ this.onSubmit}>
                         <div className="form-group">
-                            <label>Tên :</label>
+                            <label>Name :</label>
                             <input 
                                 type="text" 
                                 name="title"
@@ -69,7 +69,7 @@ class TaskForm extends Component {
                                 onChange={this.onChange }
                             />
                         </div>
-                        <label>Trạng Thái :</label>
+                        <label>Status :</label>
                         <select 
                             name="status"
                             className="form-control" 
@@ -77,8 +77,8 @@ class TaskForm extends Component {
                             value={ this.state.status }
                             onChange={ this.onChange }
                         >
-                            <option value={ true }>Kích Hoạt</option>
-                            <option value={ false }>Ẩn</option>
+                            <option value={ true }>Done</option>
+                            <option value={ false }>Pending</option>
                         </select>
                         <br />
                         <div className="text-center">

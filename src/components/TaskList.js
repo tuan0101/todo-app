@@ -10,20 +10,21 @@ class TaskList extends Component {
             return <TaskItem 
                 key={ task.id } index={ index } task={ task }
                 onUpdateStatus={ this.props.onUpdateStatus }
+                onDelete= { this.props.onDelete }
+                onEdit= { this.props.onEdit }
+                onSubmit={this.props.onSubmit}
             />
         });
-        console.log('tasks: ' + tasks);
-        console.log('element: ' + taskElement);
         
         
         return (
             <table className="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th className="text-center">STT</th>
-                        <th className="text-center">Tên</th>
-                        <th className="text-center">Trạng Thái</th>
-                        <th className="text-center">Hành Động</th>
+                        <th className="text-center">No.</th>
+                        <th className="text-center">Tasks</th>
+                        <th className="text-center">Status</th>
+                        <th className="text-center">Manipulation</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,9 +35,9 @@ class TaskList extends Component {
                         </td>
                         <td>
                             <select className="form-control">
-                                <option value="-1">Tất Cả</option>
-                                <option value="0">Ẩn</option>
-                                <option value="1">Kích Hoạt</option>
+                                <option value="-1">All</option>
+                                <option value="0">Pending</option>
+                                <option value="1">Done</option>
                             </select>
                         </td>
                         <td></td>
