@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './css/App.css';
 import './components/TaskForm';
 import TaskForm from './components/TaskForm';
-import Control from './components/Control';
+import Sort from './components/Sort';
 import TaskList from './components/TaskList';
 import AddItem from './components/AddItem';
 
@@ -172,15 +172,17 @@ class App extends Component {
                         {taskFormElement}
                     </div>
                     <div className={isDisplayForm ? 'width-60' : 'width-100'}>
-                        <button
+
+                         {/* Open task form */}
+                        {/* <button
                             type="button"
                             className="btn btn-primary"
                             onClick={this.onToggleForm}>
                             <span className="fa fa-plus mr-5"></span>Add a task
-                        </button>
+                        </button> */}
                         <AddItem onSubmit={this.onSubmit} />
                         {/* Search - Sort */}
-                        <Control />
+                        <Sort />
                         {/* List */}
                         <div className="row">
                             <div className="width-100 mt-15">

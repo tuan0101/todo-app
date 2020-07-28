@@ -20,12 +20,14 @@ class AddItem extends Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        //this.props.onSubmit(this.state); -> this return the status as a string
-        this.props.onSubmit(this.state);
-        this.setState({
-            title: '',
-            status: false
-        });
+        if(this.state.title){   // prevent adding an empty string
+            this.props.onSubmit(this.state);
+            this.setState({
+                title: '',
+                status: false
+            });
+        }
+
     }
 
 

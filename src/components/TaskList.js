@@ -9,7 +9,7 @@ class TaskList extends Component {
 
     onChange = (event) => {
         let { target: { name, value } } = event;
-
+        
         this.props.onFilter(
             name === 'filterName' ? value : this.state.filterName,
             name === 'filterStatus' ? value : this.state.filterStatus,
