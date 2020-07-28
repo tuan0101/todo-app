@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ContentEditable from 'react-contenteditable'
 
 class TaskItem extends Component {
 
@@ -44,9 +43,8 @@ class TaskItem extends Component {
 
     onEnterKey= (event) => {
         if (event.keyCode === 13) {
-            console.log('pressed enter');
             event.target.blur(); // remove focus after press enter
-            this.props.onEdit(this.state);
+            this.props.onEdit(this.props.task.id, this.state);
         }
     }
 
@@ -63,52 +61,19 @@ class TaskItem extends Component {
     }
     render() {
         const { task, index } = this.props;
-        const addButton = this.state.isEditing ?
-            <button
-                className="btn"
-                style={{ float: 'right', cursor: 'pointer' }}
-                onClick={this.onSave}
-            >
-                <span className="fa fa-plus mr-5"></span>
-                    add
-                </button> : '';
-        // const addInput = this.state.isEditing ?
-        //     <input
-        //         style={inputStyle}
-        //     >
-        //     </input> : '';
-
 
         return (
             <tr>
                 <td className="text-center">{index + 1}</td>
-                <td
-                /*  contentEditable={this.state.isEditing ? "true" : "false"}
-                  suppressContentEditableWarning="true"
-                  onClick={this.onEditing}
-                  ref={(input) => { this.textInput = input; }}
-                  type="text"
-                  name="title"
-                  value={this.state.title}
-                  onKeyUp={this.onChange} */
-
-                >
-                    {/* <ContentEditable 
-                        html={task.title}
-                        name='title'
-                        value={this.state.title}
-                        onChange={ this.onChange }>
-                        
-                    </ContentEditable> */}
-
+                <td>
                     <input 
                         type="text"
                         name="title"
+                        className="input-cell"
                         style={ inputStyle }
                         value={this.state.title}
                         onChange={this.onChange}
-                        onKeyUp={ this.onEnterKey }
-
+                        onKeyUp={ this.onEnterKey }                       
                     />
 
 

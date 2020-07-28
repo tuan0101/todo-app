@@ -517,3 +517,13 @@ tr {
 .label-success[href]:focus {
   background-color: #449d44;
 }
+
+th {
+  background-color: #13a318;
+  color: white;
+}
+
+.input-cell:focus {
+  background: transparent;
+  outline: none
+}

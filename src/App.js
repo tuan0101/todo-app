@@ -11,7 +11,11 @@ class App extends Component {
     state = {
         tasks: [],
         isDisplayForm: false,
-        isEditing: false
+        isEditing: false,
+        filter: {
+            name: '',
+            status: 0
+        }
     }
 
     // this function is called once after refresh the page
@@ -92,47 +96,70 @@ class App extends Component {
         //localStorage.setItem('tasks', JSON.stringify(this.state.tasks));       
     }
 
-    onEdit = (data) => {
-        const { tasks } = this.state;
-
-        if (data.id === '') {
+    onEdit = (id, data) => {
+        const { tasks } = this.state;   
+        
+        if (id === '') {
             // add a new task
             data.id = this.generateID();
             tasks.push(data);
         } else {
             // edit current task
-            console.log('data ID: ' + data.id);
-            console.log('data title: ' + data.title);
-            
+
             let tempTask = this.state.tasks.map((task) => {
-                if (task.id === data.id) {
+                if (task.id === id) {
                     task.title = data.title;
                 }
                 return task;
             });
-    
+
             this.setState({
                 tasks: tempTask
             });
 
         }
-
-        
-        this.setState({
-            tasks: tasks
-        });
+        console.log('data: ' + JSON.stringify(data.title) );
+        // this.setState({
+        //     tasks: tasks
+        // });
 
         localStorage.setItem('tasks', JSON.stringify(tasks));
-        console.log(tasks);
 
+    }
+
+    onFilter = (filterName, filterStatus) => {
+        filterStatus = parseInt(filterStatus);
+        this.setState({
+            filter: {
+                name: filterName.toLowerCase(),
+                status: filterStatus
+            }
+        });
     }
 
     render() {
         // const tasks = this.state.tasks
-        const { tasks, isDisplayForm } = this.state;
+        let { tasks, isDisplayForm, filter } = this.state;
+
         const taskFormElement = isDisplayForm ?
             <TaskForm onCloseForm={this.onCloseForm} onSubmit={this.onSubmit} /> : '';
 
+        if (filter) {
+            if (filter.name) {
+                tasks = tasks.filter((task) => {
+                    return task.title.toLowerCase().indexOf(filter.name) !== -1;
+                });
+            }
+
+            tasks = tasks.filter((task) => {
+                if (filter.status === 0) {
+                    return task;
+                } else {
+                    return task.status === (filter.status === 1 ? true : false)
+                }
+            });
+
+        }
         return (
             <div className="container">
                 <div className="text-center">
@@ -163,6 +190,7 @@ class App extends Component {
                                     onDelete={this.onDelete}
                                     onEdit={this.onEdit}
                                     onSubmit={this.onSubmit}
+                                    onFilter={this.onFilter}
                                 />
                             </div>
                         </div>
