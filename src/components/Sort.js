@@ -8,17 +8,14 @@ class Sort extends Component {
         }
      }
 
-    onClick = (sortBy, sortValue) =>{
-        console.log("sort by: " + sortBy);
-        console.log("sort value: " + sortValue);
-        
+    onClick = (sortBy, sortValue) =>{      
         this.setState({
             sort: {
                 by: sortBy,
                 value: sortValue
             }
         });
-        this.props.onSort(this.state.sort);
+        this.props.onSort(sortBy, sortValue);
     }
     render() { 
         const { sort } = this.state;

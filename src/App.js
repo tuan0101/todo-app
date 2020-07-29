@@ -141,17 +141,22 @@ class App extends Component {
         });
     }
 
-    onSort = (sort) => {
-        console.log(sort);
-        
+    onSort = (sortBy, sortValue) => {
+        this.setState({
+            sort: {
+                by: sortBy,
+                value: sortValue
+            }
+        });             
     }
     render() {
         // const tasks = this.state.tasks
-        let { tasks, isDisplayForm, filter } = this.state;
+        let { tasks, isDisplayForm, filter, sort } = this.state;
 
         const taskFormElement = isDisplayForm ?
             <TaskForm onCloseForm={this.onCloseForm} onSubmit={this.onSubmit} /> : '';
 
+        // search
         if (filter) {
             if (filter.name) {
                 tasks = tasks.filter((task) => {
@@ -168,6 +173,24 @@ class App extends Component {
             });
 
         }
+
+        if(sort.by === 'name'){
+
+            tasks.sort((a, b) => {
+                if(a.title > b.title) return sort.value;
+                else if(a.title < b.title) return -sort.value;
+                else return 0;
+            });
+
+        }else{
+            tasks.sort((a, b) => {
+                if(a.status > b.status) return -sort.value;
+                else if(a.status < b.status) return sort.value;
+                else return 0;
+            });
+        }
+
+
         return (
             <div className="container">
                 <div className="text-center">
