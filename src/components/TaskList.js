@@ -8,6 +8,7 @@ class TaskList extends Component {
     }
 
     onChange = (event) => {
+        
         let { target: { name, value } } = event;
         
         this.props.onFilter(
@@ -17,6 +18,13 @@ class TaskList extends Component {
         this.setState({
             [name]: value
         });
+    }
+
+    onClick = (e)=> {
+        e.preventDefault();
+        console.log("sort by: " );
+        console.log("sort value: ");
+
     }
 
     render() {
@@ -63,7 +71,7 @@ class TaskList extends Component {
                                 onChange={ this.onChange }
                             >
                                 <option value="0">All</option>
-                                <option value="-1">Pending</option>
+                                <option value="-1" onClick={this.onClick}>Pending</option>
                                 <option value="1">Done</option>
                             </select>
                         </td>

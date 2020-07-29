@@ -417,9 +417,9 @@ fieldset[disabled] .btn {
   background-color: #f5f5f5;
 }
 
-/* .dropdown-menu:hover > li > a {
+.dropdown-menu:hover{
   display: block;
-} */
+}
 .dropdown-toggle:focus + ul{
   display: block;
 }
@@ -533,4 +533,13 @@ th {
 .input-cell:focus {
   background: transparent;
   outline: none
+}
+
+.sort-selected::after{
+  content: '\f00c';
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 10px;
+  display: inline-block;
 }

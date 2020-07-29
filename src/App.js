@@ -15,6 +15,10 @@ class App extends Component {
         filter: {
             name: '',
             status: 0
+        },
+        sort: {
+            by: 'name',
+            value: 1
         }
     }
 
@@ -137,6 +141,10 @@ class App extends Component {
         });
     }
 
+    onSort = (sort) => {
+        console.log(sort);
+        
+    }
     render() {
         // const tasks = this.state.tasks
         let { tasks, isDisplayForm, filter } = this.state;
@@ -181,8 +189,10 @@ class App extends Component {
                             <span className="fa fa-plus mr-5"></span>Add a task
                         </button> */}
                         <AddItem onSubmit={this.onSubmit} />
-                        {/* Search - Sort */}
-                        <Sort />
+                        {/* Sort */}
+                        <Sort 
+                            onSort={ this.onSort }
+                        />
                         {/* List */}
                         <div className="row">
                             <div className="width-100 mt-15">

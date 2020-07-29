@@ -9,7 +9,6 @@ class TaskItem extends Component {
 
     onUpdateStatus = () => {
         this.props.onUpdateStatus(this.props.task.id);
-
     }
 
     onDelete = () => {
@@ -54,7 +53,7 @@ class TaskItem extends Component {
 
     }
 
-    componentWillMount(){
+    componentDidMount(){
         this.setState({
             title: this.props.task.title
         });
