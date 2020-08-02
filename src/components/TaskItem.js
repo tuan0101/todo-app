@@ -4,7 +4,7 @@ class TaskItem extends Component {
 
     state = {
         title: '',
-        isEditing: false
+        isHighlight: false
     }
 
     onUpdateStatus = () => {
@@ -13,21 +13,6 @@ class TaskItem extends Component {
 
     onDelete = () => {
         this.props.onDelete(this.props.task.id);
-    }
-
-
-    onEditing = () => {
-        let { isEditing } = this.state;
-        isEditing = true;
-        this.setState({
-            isEditing: isEditing
-        });
-        console.log('isEditing: ' + isEditing);
-
-        // this direct syntax doesn't work
-        // this.setState({
-        //     isEditing: !isEditing
-        // });
     }
 
     onChange = (event) => {
@@ -53,11 +38,24 @@ class TaskItem extends Component {
 
     }
 
+    onHighlight = () => {
+        this.setState({
+            isHighlight: !this.state.isHighlight
+        });
+        this.props.onHighlight(this.props.task.id);
+        
+    }
+
     componentDidMount(){
         this.setState({
-            title: this.props.task.title
+            title: this.props.task.title,
+
+            // get highlight status updated when refreshing the page
+            isHighlight: this.props.task.isHighlight
         });
     }
+
+
     render() {
         const { task, index } = this.props;
 
@@ -68,7 +66,7 @@ class TaskItem extends Component {
                     <input 
                         type="text"
                         name="title"
-                        className="input-cell"
+                        className={'input-cell ' + (this.state.isHighlight === true ? "glow" : "")}
                         style={ inputStyle }
                         value={this.state.title}
                         onChange={this.onChange}
@@ -91,11 +89,12 @@ class TaskItem extends Component {
                     <button
                         type="button"
                         className="btn btn-warning"
+                        onClick={ this.onHighlight }
                     >
-                        <span className="fa fa-pencil mr-5">
+                        <span className="fa fa-pencil mr-5" >
                         </span>Highlight
 
-                        </button>
+                    </button>
                         &nbsp;
                         <button
                         type="button"
@@ -110,11 +109,12 @@ class TaskItem extends Component {
     }
 }
 const inputStyle = {
+    fontSize: "17px",
     border: "none",
     background: "transparent",
     width: "100%",
     height: "inherit",
-    opacity: "1"
+    opacity: "100"
 }
 
 export default TaskItem;

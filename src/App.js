@@ -10,8 +10,7 @@ import AddItem from './components/AddItem';
 class App extends Component {
     state = {
         tasks: [],
-        isDisplayForm: false,
-        isEditing: false,
+        isDisplayForm: false,       // uss in case adding multiple field, such as user management.
         filter: {
             name: '',
             status: 0
@@ -58,11 +57,6 @@ class App extends Component {
     }
 
     onSubmit = (data) => {
-        // const task = {
-        //     id: this.generateID(),
-        //     name: data.name,
-        //     status: data.target
-        // }
         const { tasks } = this.state;
         data.id = this.generateID(); //add ID attribution to data (tasks)
         tasks.push(data);
@@ -101,15 +95,14 @@ class App extends Component {
     }
 
     onEdit = (id, data) => {
-        const { tasks } = this.state;   
-        
+        const { tasks } = this.state;
+
         if (id === '') {
             // add a new task
             data.id = this.generateID();
             tasks.push(data);
         } else {
             // edit current task
-
             let tempTask = this.state.tasks.map((task) => {
                 if (task.id === id) {
                     task.title = data.title;
@@ -122,7 +115,7 @@ class App extends Component {
             });
 
         }
-        console.log('data: ' + JSON.stringify(data.title) );
+        console.log('data: ' + JSON.stringify(data.title));
         // this.setState({
         //     tasks: tasks
         // });
@@ -147,8 +140,25 @@ class App extends Component {
                 by: sortBy,
                 value: sortValue
             }
-        });             
+        });
     }
+
+    onHighlight = (highlightID) => {
+        
+        let tempTask = this.state.tasks.map((task) => {
+            if (task.id === highlightID) {
+                task.isHighlight = !task.isHighlight;
+            }
+            return task;
+        });
+
+        this.setState({
+            tasks: tempTask
+        });
+        localStorage.setItem('tasks', JSON.stringify(this.state.tasks));
+
+    }
+    
     render() {
         // const tasks = this.state.tasks
         let { tasks, isDisplayForm, filter, sort } = this.state;
@@ -174,18 +184,18 @@ class App extends Component {
 
         }
 
-        if(sort.by === 'name'){
+        if (sort.by === 'name') {
 
             tasks.sort((a, b) => {
-                if(a.title > b.title) return sort.value;
-                else if(a.title < b.title) return -sort.value;
+                if (a.title > b.title) return sort.value;
+                else if (a.title < b.title) return -sort.value;
                 else return 0;
             });
 
-        }else{
+        } else {
             tasks.sort((a, b) => {
-                if(a.status > b.status) return -sort.value;
-                else if(a.status < b.status) return sort.value;
+                if (a.status > b.status) return -sort.value;
+                else if (a.status < b.status) return sort.value;
                 else return 0;
             });
         }
@@ -204,7 +214,7 @@ class App extends Component {
                     </div>
                     <div className={isDisplayForm ? 'width-60' : 'width-100'}>
 
-                         {/* Open task form */}
+                        {/* Open task form */}
                         {/* <button
                             type="button"
                             className="btn btn-primary"
@@ -213,8 +223,8 @@ class App extends Component {
                         </button> */}
                         <AddItem onSubmit={this.onSubmit} />
                         {/* Sort */}
-                        <Sort 
-                            onSort={ this.onSort }
+                        <Sort
+                            onSort={this.onSort}
                         />
                         {/* List */}
                         <div className="row">
@@ -226,6 +236,7 @@ class App extends Component {
                                     onEdit={this.onEdit}
                                     onSubmit={this.onSubmit}
                                     onFilter={this.onFilter}
+                                    onHighlight= {this.onHighlight}
                                 />
                             </div>
                         </div>

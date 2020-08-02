@@ -67,6 +67,7 @@
     min-height: 1px;
     padding: 0 15px;
     float: left;
+    background-color: none;
   }
 }
 
@@ -473,6 +474,9 @@ tr {
   border-color: inherit;
 }
 
+table {
+  margin: 10px 0px;
+}
 .table-bordered {
   border: 1px solid #ddd;
 }
@@ -543,3 +547,36 @@ th {
   margin-left: 10px;
   display: inline-block;
 }
+
+.glow {
+  color: white;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 1px #fff, 
+                 0 0 2px #fff, 
+                 0 0 3px #00e6e6, 
+                 0 0 4px #00e6e6, 
+                 0 0 5px #00e6e6,
+                 0 0 6px #00e6e6, 
+                 0 0 7px #00e6e6;
+  }
+  
+  to {
+    text-shadow: 0 0 3px #fff, 
+                 0 0 4px #6efff8, 
+                 0 0 5px #6efff8, 
+                 0 0 6px #6efff8, 
+                 0 0 7px #6efff8, 
+                 0 0 8px #6efff8, 
+                 0 0 9px #6efff8;
+  }
+}
+
+
+
+

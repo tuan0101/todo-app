@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 class AddItem extends Component {
     state = {
         title: '',
-        status: false
+        status: false,
+        isHighlight: false
     }
 
     onChange = (event) => {
