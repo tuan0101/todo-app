@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-.background {
+html {
   background-image: linear-gradient(135deg, #f5f7fa 0%, #a0b1ce 100%);
   
 }
@@ -10,7 +10,7 @@
 hr {
   border: none;
   height: 1px;
-  background-image: linear-gradient(to right, #f0f0f0, #00b9ff, #59d941, #f0f0f0);
+  background-image: linear-gradient(to right, #f0f0f0, #00b9ff, #59d941, #c0c8d4);
 
   /* background: -moz-linear-gradient(left, #1C6EA4 0%, #2388CB 45%, #144E75 100%);
   background: -webkit-linear-gradient(left, #1C6EA4 0%, #2388CB 45%, #144E75 100%);

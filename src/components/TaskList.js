@@ -71,8 +71,9 @@ class TaskList extends Component {
                                 onChange={ this.onChange }
                             >
                                 <option value="0">All</option>
-                                <option value="-1" onClick={this.onClick}>Pending</option>
+                                <option value="-1">Pending</option>
                                 <option value="1">Done</option>
+                                <option value="2">Highlighting</option>
                             </select>
                         </td>
                         <td></td>

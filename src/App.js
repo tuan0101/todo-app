@@ -74,6 +74,7 @@ class App extends Component {
                 task.status = !task.status;
             }
             return task;
+
         });
 
         this.setState({
@@ -177,7 +178,10 @@ class App extends Component {
             tasks = tasks.filter((task) => {
                 if (filter.status === 0) {
                     return task;
-                } else {
+                } else if(filter.status === 2){
+                    return task.isHighlight === true;
+                }
+                else {
                     return task.status === (filter.status === 1 ? true : false)
                 }
             });
