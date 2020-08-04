@@ -161,12 +161,16 @@ class App extends Component {
     }
 
     onDeleteAll = () => {
-        let {tasks} = this.state;
+        
         let tempTask = [];
         this.setState({
-            tasks: tempTask
+            tasks: []
+        },()=>{
+            localStorage.setItem('tasks', JSON.stringify(this.state.tasks)); 
         });
-        localStorage.setItem('tasks', JSON.stringify(tasks));
+        // this sometimes doesn't work because setState() is async.
+        // need to use call back function as above
+        // localStorage.setItem('tasks', JSON.stringify(this.state.tasks)); 
     }
 
     onHighlightAll = () => {
