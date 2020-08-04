@@ -347,6 +347,12 @@ fieldset[disabled] .btn {
   border-color: #255625;
 }
 
+.btn-info {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+
 .input-group {
   position: relative;
   display: table;

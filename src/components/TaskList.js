@@ -8,9 +8,9 @@ class TaskList extends Component {
     }
 
     onChange = (event) => {
-        
+
         let { target: { name, value } } = event;
-        
+
         this.props.onFilter(
             name === 'filterName' ? value : this.state.filterName,
             name === 'filterStatus' ? value : this.state.filterStatus,
@@ -20,27 +20,31 @@ class TaskList extends Component {
         });
     }
 
-    onClick = (e)=> {
+    onClick = (e) => {
         e.preventDefault();
-        console.log("sort by: " );
+        console.log("sort by: ");
         console.log("sort value: ");
 
     }
 
+    onDeleteAll = () => {
+        
+    }
+
     render() {
         const { tasks } = this.props; //const tasks = this.props.tasks
-        const { filterName, filterStatus} = this.state;
+        const { filterName, filterStatus } = this.state;
         const taskElement = tasks.map((task, index) => {
-            return <TaskItem 
-                key={ task.id } index={ index } task={ task }
-                onUpdateStatus={ this.props.onUpdateStatus }
-                onDelete= { this.props.onDelete }
-                onEdit= { this.props.onEdit }
-                onHighlight={ this.props.onHighlight }
+            return <TaskItem
+                key={task.id} index={index} task={task}
+                onUpdateStatus={this.props.onUpdateStatus}
+                onDelete={this.props.onDelete}
+                onEdit={this.props.onEdit}
+                onHighlight={this.props.onHighlight}
             />
         });
-        
-        
+
+
         return (
             <table className="table table-bordered table-hover">
                 <thead>
@@ -55,20 +59,20 @@ class TaskList extends Component {
                     <tr>
                         <td></td>
                         <td>
-                            <input 
-                                type="text" 
-                                className="form-control" 
+                            <input
+                                type="text"
+                                className="form-control"
                                 name="filterName"
-                                value={ filterName }
-                                onChange={ this.onChange }
+                                value={filterName}
+                                onChange={this.onChange}
                             />
                         </td>
                         <td>
-                            <select 
+                            <select
                                 className="form-control"
                                 name="filterStatus"
-                                value={ filterStatus }
-                                onChange={ this.onChange }
+                                value={filterStatus}
+                                onChange={this.onChange}
                             >
                                 <option value="0">All</option>
                                 <option value="-1">Pending</option>
@@ -76,7 +80,25 @@ class TaskList extends Component {
                                 <option value="2">Highlighting</option>
                             </select>
                         </td>
-                        <td></td>
+                        <td className="text-center">
+                            <button
+                                type="button"
+                                className="btn btn-info"
+                                onClick={this.onHighlightll}
+                            >
+                                <span className="fa fa-pencil mr-5" >
+                                </span>H-Light All
+
+                            </button>
+                            &nbsp;
+                            <button
+                                type="button"
+                                className="btn btn-info"
+                                onClick={this.onDeleteAll}
+                            >
+                                <span className="fa fa-trash mr-5"></span>Del All
+                            </button>
+                        </td>
                     </tr>
                     {taskElement}
                 </tbody>

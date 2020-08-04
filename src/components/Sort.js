@@ -86,7 +86,7 @@ class Sort extends Component {
                                     "sort-selected" : ''}`}
                                     style={{ fontWeight: "bold"}}
                                 >
-                                    <i class="fas fa-angle-double-down mr-5"></i>
+                                    <i className="fas fa-angle-double-down mr-5"></i>
                                     Unsort
                                 </a>
                             </li>
