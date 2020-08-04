@@ -188,6 +188,9 @@ class App extends Component {
 
         }
 
+        if (sort.by === 'status' && sort.value ===2){
+            tasks = tasks;
+        }
         if (sort.by === 'name') {
 
             tasks.sort((a, b) => {
@@ -196,7 +199,8 @@ class App extends Component {
                 else return 0;
             });
 
-        } else {
+        }
+        else {
             tasks.sort((a, b) => {
                 if (a.status > b.status) return -sort.value;
                 else if (a.status < b.status) return sort.value;

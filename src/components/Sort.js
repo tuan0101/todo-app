@@ -79,6 +79,17 @@ class Sort extends Component {
                                     Pending
                                 </a>
                             </li>
+                            <li onClick={ () => this.onClick('status', 2) }>
+                                <a 
+                                    role="button"
+                                    className={`fa ${(sort.by === 'status' && sort.value === 2) ?
+                                    "sort-selected" : ''}`}
+                                    style={{ fontWeight: "bold"}}
+                                >
+                                    <i class="fas fa-angle-double-down mr-5"></i>
+                                    Unsort
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
