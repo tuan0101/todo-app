@@ -31,6 +31,10 @@ class TaskList extends Component {
         this.props.onDeleteAll();
     }
 
+    onHighlightAll = () => {
+        this.props.onHighlightAll();
+    }
+
     render() {
         const { tasks } = this.props; //const tasks = this.props.tasks
         const { filterName, filterStatus } = this.state;
@@ -84,7 +88,7 @@ class TaskList extends Component {
                             <button
                                 type="button"
                                 className="btn btn-info"
-                                onClick={this.onHighlightll}
+                                onClick={this.onHighlightAll}
                             >
                                 <span className="fa fa-pencil mr-5" >
                                 </span>H-Light All

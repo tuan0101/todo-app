@@ -55,6 +55,11 @@ class TaskItem extends Component {
         });
     }
 
+    // update after setting all-Highlight
+    static getDerivedStateFromProps(props, state) {
+        return {isHighlight: props.task.isHighlight};
+    }
+
 
     render() {
         const { task, index } = this.props;

@@ -161,10 +161,44 @@ class App extends Component {
     }
 
     onDeleteAll = () => {
+        let {tasks} = this.state;
+        let tempTask = [];
         this.setState({
-            tasks: []
+            tasks: tempTask
         });
-        
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    onHighlightAll = () => {
+        let {tasks} = this.state;
+        let count = 0;
+        let tempTask;
+        console.log('begin1: ', tasks)
+        tasks.map((task)=>{
+            if(task.isHighlight === true){
+                count++;
+            }
+        });
+        console.log('count: ', count)
+
+        console.log('begin: ', tasks, 'temptask: ', tempTask)
+
+        if(count === tasks.length){
+            tempTask = tasks.map((task)=>{
+                task.isHighlight = false;
+                return task;
+            });
+        } else{
+            tempTask = tasks.map((task)=>{
+                task.isHighlight = true;
+                return task;
+            });
+        }
+
+        this.setState({
+            tasks: tempTask
+        });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
     }
     
     render() {
@@ -254,6 +288,7 @@ class App extends Component {
                                     onFilter={this.onFilter}
                                     onHighlight= {this.onHighlight}
                                     onDeleteAll= {this.onDeleteAll}
+                                    onHighlightAll={this.onHighlightAll}
                                 />
                             </div>
                         </div>
