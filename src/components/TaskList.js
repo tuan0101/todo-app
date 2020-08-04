@@ -28,7 +28,7 @@ class TaskList extends Component {
     }
 
     onDeleteAll = () => {
-        
+        this.props.onDeleteAll();
     }
 
     render() {

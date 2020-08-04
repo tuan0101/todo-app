@@ -159,6 +159,13 @@ class App extends Component {
         localStorage.setItem('tasks', JSON.stringify(this.state.tasks));
 
     }
+
+    onDeleteAll = () => {
+        this.setState({
+            tasks: []
+        });
+        
+    }
     
     render() {
         // const tasks = this.state.tasks
@@ -188,6 +195,7 @@ class App extends Component {
 
         }
 
+        // sort
         if (sort.by === 'status' && sort.value ===2){
             tasks = tasks;
         }
@@ -245,6 +253,7 @@ class App extends Component {
                                     onSubmit={this.onSubmit}
                                     onFilter={this.onFilter}
                                     onHighlight= {this.onHighlight}
+                                    onDeleteAll= {this.onDeleteAll}
                                 />
                             </div>
                         </div>
