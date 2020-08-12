@@ -20,7 +20,7 @@ class Sort extends Component {
     render() { 
         const { sort } = this.state;
         return (  
-            <div className="width-50">
+            <div className="width-30">
                     <div className="dropdown">
                         <button
                             className="btn btn-primary dropdown-toggle"

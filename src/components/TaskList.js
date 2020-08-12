@@ -49,10 +49,10 @@ class TaskList extends Component {
             <table className="table table-bordered table-hover">
                 <thead>
                     <tr className="">
-                        <th className="text-center">No.</th>
-                        <th className="text-center">Tasks</th>
-                        <th className="text-center">Status</th>
-                        <th className="text-center">Manipulation</th>
+                        <th className="text-center c1">No.</th>
+                        <th className="text-center c2">Tasks</th>
+                        <th className="text-center c3">Status</th>
+                        <th className="text-center c4">Manipulation</th>
                     </tr>
                 </thead>
                 <tbody>

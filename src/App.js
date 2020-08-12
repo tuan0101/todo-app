@@ -116,10 +116,6 @@ class App extends Component {
             });
 
         }
-        console.log('data: ' + JSON.stringify(data.title));
-        // this.setState({
-        //     tasks: tasks
-        // });
 
         localStorage.setItem('tasks', JSON.stringify(tasks));
 
@@ -145,7 +141,7 @@ class App extends Component {
     }
 
     onHighlight = (highlightID) => {
-        
+
         let tempTask = this.state.tasks.map((task) => {
             if (task.id === highlightID) {
                 task.isHighlight = !task.isHighlight;
@@ -164,11 +160,10 @@ class App extends Component {
         this.setState({
             tasks: []
         });
-        
+
     }
-    
+
     render() {
-        // const tasks = this.state.tasks
         let { tasks, isDisplayForm, filter, sort } = this.state;
 
         const taskFormElement = isDisplayForm ?
@@ -185,7 +180,7 @@ class App extends Component {
             tasks = tasks.filter((task) => {
                 if (filter.status === 0) {
                     return task;
-                } else if(filter.status === 2){
+                } else if (filter.status === 2) {
                     return task.isHighlight === true;
                 }
                 else {
@@ -196,7 +191,7 @@ class App extends Component {
         }
 
         // sort
-        if (sort.by === 'status' && sort.value ===2){
+        if (sort.by === 'status' && sort.value === 2) {
             tasks = tasks;
         }
         if (sort.by === 'name') {
@@ -237,11 +232,14 @@ class App extends Component {
                             onClick={this.onToggleForm}>
                             <span className="fa fa-plus mr-5"></span>Add a task
                         </button> */}
-                        <AddItem onSubmit={this.onSubmit} />
-                        {/* Sort */}
-                        <Sort
-                            onSort={this.onSort}
-                        />
+                        <div className="main-bar">
+                            <AddItem onSubmit={this.onSubmit} />
+                            {/* Sort */}
+                            <Sort
+                                onSort={this.onSort}
+                            />
+                        </div>
+
                         {/* List */}
                         <div className="row">
                             <div className="width-100 mt-15">
@@ -252,8 +250,8 @@ class App extends Component {
                                     onEdit={this.onEdit}
                                     onSubmit={this.onSubmit}
                                     onFilter={this.onFilter}
-                                    onHighlight= {this.onHighlight}
-                                    onDeleteAll= {this.onDeleteAll}
+                                    onHighlight={this.onHighlight}
+                                    onDeleteAll={this.onDeleteAll}
                                 />
                             </div>
                         </div>
