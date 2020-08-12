@@ -46,13 +46,17 @@ class TaskItem extends Component {
         
     }
 
+    // get highlight status and title updated when refreshing the page
     componentDidMount(){
         this.setState({
-            title: this.props.task.title,
-
-            // get highlight status updated when refreshing the page
+            title: this.props.task.title,           
             isHighlight: this.props.task.isHighlight
         });
+    }
+
+    // update after setting all-Highlight
+    static getDerivedStateFromProps(props, state) {
+        return {isHighlight: props.task.isHighlight};
     }
 
 

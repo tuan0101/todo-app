@@ -157,10 +157,48 @@ class App extends Component {
     }
 
     onDeleteAll = () => {
+        
+        let tempTask = [];
         this.setState({
             tasks: []
+        },()=>{
+            localStorage.setItem('tasks', JSON.stringify(this.state.tasks)); 
         });
+        // this sometimes doesn't work because setState() is async.
+        // need to use call back function as above
+        // localStorage.setItem('tasks', JSON.stringify(this.state.tasks)); 
+    }
 
+    onHighlightAll = () => {
+        let {tasks} = this.state;
+        let count = 0;
+        let tempTask;
+        console.log('begin1: ', tasks)
+        tasks.map((task)=>{
+            if(task.isHighlight === true){
+                count++;
+            }
+        });
+        console.log('count: ', count)
+
+        console.log('begin: ', tasks, 'temptask: ', tempTask)
+
+        if(count === tasks.length){
+            tempTask = tasks.map((task)=>{
+                task.isHighlight = false;
+                return task;
+            });
+        } else{
+            tempTask = tasks.map((task)=>{
+                task.isHighlight = true;
+                return task;
+            });
+        }
+
+        this.setState({
+            tasks: tempTask
+        });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
     render() {
@@ -250,8 +288,9 @@ class App extends Component {
                                     onEdit={this.onEdit}
                                     onSubmit={this.onSubmit}
                                     onFilter={this.onFilter}
-                                    onHighlight={this.onHighlight}
-                                    onDeleteAll={this.onDeleteAll}
+                                    onHighlight= {this.onHighlight}
+                                    onDeleteAll= {this.onDeleteAll}
+                                    onHighlightAll={this.onHighlightAll}
                                 />
                             </div>
                         </div>
